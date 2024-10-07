@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture - API</title>
+    <script
+        src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        .font-crimison-pro {
+            font-family: "Crimson Pro";
+        }
+
+        .font-poppins {
+            font-family: "Poppins";
+        }
+
+        #profile-tab.active-tab,
+        #dashboard-tab.active-tab,
+        #settings-tab.active-tab {
+            background-color: #155042 !important;
+            /* Azul escuro */
+            color: white !important;
+            /* Texto branco */
+            border-color: transparent !important;
+            /* Remover a borda padrão */
+        }
+
+        #profile-tab,
+        #dashboard-tab,
+        #settings-tab {
+            background-color: #155042 !important;
+            /* Azul escuro */
+            color: white !important;
+            /* Texto branco */
+            border-color: transparent !important;
+            letter-spacing: 0.1em;
+
+        }
+
+        /* Estilo para o estado hover */
+        .tab-hover:hover {
+            background-color: #155042 !important;
+            /* Cinza claro */
+            color: #FFF !important;
+            border-color: transparent !important;
+            /* Cinza escuro */
+        }
+
+        /* Garantir que o botão não ativo tenha o texto correto */
+        .tab-hover {
+            color: #FFF !important;
+            border-color: transparent !important;
+            /* Cinza padrão */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hidden md:block background-mobile">
+        <nav class="border-gray-200 bg-[#9FAA00]">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Agriculture</span>
+                </a>
+                <button data-collapse-toggle="navbar-solid-bg" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    aria-controls="navbar-solid-bg" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+                <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
+                    <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+                        <li>
+                          <a href="condicoes.html" class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Condições</a>
+                        </li>
+                        <li>
+                          <a href="precipitacao.html" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Precipitação</a>
+                        </li>
+                        <li>
+                          <a href="indice-uv.html" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Índice UV</a>
+                        </li>
+                        <li>
+                          <a href="vento.html" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Vento</a>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+        </nav>
+        <div
+            class="w-full h-[70vh] md:h-[609px] flex-shrink-0 rounded-b-[294.5px] bg-[#14280A] backdrop-blur-[25px] p-8 lg:p-14">
+            <h1 class="text-8xl flex gap-8 items-center justify-center mt-28 font-poppins">
+                <span class="icons">
+                    <img src="svg/sol-atencao.svg" alt="">
+                </span>
+                <span class="text-white">Índice UV</span>
+            </h1>
+            <div class="flex items-center justify-center">
+                <div class="mt-20 w-1/2 text-center bg-white border border-gray-200 rounded-full shadow sm:p-8">
+                    <div class="grid grid-cols-7">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">S</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">4</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">M</span>
+                            <span class="text-xl text-white font-semibold bg-[#155042] rounded-full py-4 px-6">5</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">T</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">6</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">W</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">7</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">T</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">8</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">F</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">9</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">S</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 p-10 gap-12 items-center">
+            <div class="div">
+
+            </div>
+            <div class="bg-[#155042] rounded-r-lg  p-10">
+                <h1
+                    class="text-white flex items-center font-[500] text-[5vw] md:text-[74px] leading-none tracking-[1.28px] font-serif font-crimison-pro">
+                    <span class="font-crimison-pro"> Rio de Janeiro</span>
+                    <span class="icon flex-shrink-0 w-[6vw] h-[8vw] md:w-[24px] md:h-[32px] mr-2">
+                        <img src="svg/direcao.svg" alt="">
+                    </span>
+                </h1>
+                <div class="flex mt-4">
+                    <span class="text-[10vw] md:text-[130px] leading-none text-white font-poppins">25°</span>
+                    <img src="svg/nublado-com-sol.svg" alt="">
+                </div>
+                <h4 class="text-white font-poppins text-[32px] leading-[25px] font-normal mb-8 mt-3">Oct 05 2024
+                </h4>
+                <h2 class="text-white font-crimison-pro text-[48px] leading-[29px] font-bold tracking-[0.3px]">
+                    Partly
+                    Cloudy</h2>
+                <h4 class="text-white font-poppins text-[32px] leading-[37px] font-normal mt-3">Saturday</h4>
+            </div>
+        </div>
+        <h4 class="text-6xl text-white px-20 pb-4 mt-10">0 baixo</h4>
+        <p class="text-2xl font-poppins text-white px-20 pb-8">
+            IUV da Organização Mundial da Saúde
+        </p>
+        <div class="graficos py-10">
+            <div id="controls-carousel" class="relative w-full" data-carousel="static">
+                <!-- Carousel wrapper -->
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                    <!-- Item 1 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="svg/grafico-v2.png" class="object-contain h-full w-full">
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                        <img src="svg/grafico-v3.png" class="object-contain h-full w-full">
+                    </div>
+                </div>                
+                <!-- Slider controls -->
+                <button type="button"
+                    class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                    data-carousel-prev>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#23856DB8]">
+                        <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 1 1 5l4 4" />
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button"
+                    class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                    data-carousel-next>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#23856DB8]">
+                        <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <footer class="bg-svg-pattern h-96 rounded-lg shadow w-full"></footer>
+    </div>
+</body>
+
+</html>

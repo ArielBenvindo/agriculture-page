@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture - API</title>
+    <script
+        src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        .font-crimison-pro {
+            font-family: "Crimson Pro";
+        }
+
+        .font-poppins {
+            font-family: "Poppins";
+        }
+
+        #profile-tab.active-tab,
+        #dashboard-tab.active-tab,
+        #settings-tab.active-tab {
+            background-color: #155042 !important;
+            /* Azul escuro */
+            color: white !important;
+            /* Texto branco */
+            border-color: transparent !important;
+            /* Remover a borda padrão */
+        }
+
+        #profile-tab,
+        #dashboard-tab,
+        #settings-tab {
+            background-color: #155042 !important;
+            /* Azul escuro */
+            color: white !important;
+            /* Texto branco */
+            border-color: transparent !important;
+            letter-spacing: 0.1em;
+
+        }
+
+        /* Estilo para o estado hover */
+        .tab-hover:hover {
+            background-color: #155042 !important;
+            /* Cinza claro */
+            color: #FFF !important;
+            border-color: transparent !important;
+            /* Cinza escuro */
+        }
+
+        /* Garantir que o botão não ativo tenha o texto correto */
+        .tab-hover {
+            color: #FFF !important;
+            border-color: transparent !important;
+            /* Cinza padrão */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hidden md:block background-mobile">
+        <nav class="border-gray-200 bg-[#9FAA00]">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">Plantão</span>
+                </a>
+                <button data-collapse-toggle="navbar-solid-bg" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    aria-controls="navbar-solid-bg" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+                <div class="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
+                    <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+                        <li>
+                          <a href="condicoes.html" class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Condições</a>
+                        </li>
+                        <li>
+                          <a href="precipitacao.html" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Precipitação</a>
+                        </li>
+                        <li>
+                          <a href="indice-uv.html" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Índice UV</a>
+                        </li>
+                        <li>
+                          <a href="vento.html" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Vento</a>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+        </nav>
+        <div
+            class="w-full h-[70vh] md:h-[609px] flex-shrink-0 rounded-b-[294.5px] bg-[#14280A] backdrop-blur-[25px] p-8 lg:p-14">
+            <h1 class="text-8xl flex gap-8 items-center justify-center mt-28 font-poppins">
+                <span class="icons">
+                    <svg width="88" height="79" viewBox="0 0 88 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.03125 27.4688C4.71875 27.8438 3.54167 27.7708 2.5 27.25C1.47917 26.7083 0.8125 25.8438 0.5 24.6562C0.166667 23.5104 0.28125 22.4271 0.84375 21.4062C1.42708 20.3854 2.34375 19.7083 3.59375 19.375C6.90625 18.5 10.25 17.8125 13.625 17.3125C17.0208 16.8125 20.3542 16.5625 23.625 16.5625C25.4792 16.5625 27.25 16.6146 28.9375 16.7188C30.625 16.8229 32.2604 16.9479 33.8438 17.0938C35.4271 17.2396 36.9896 17.375 38.5312 17.5C40.0729 17.6042 41.625 17.6562 43.1875 17.6562C44.7292 17.6562 45.9375 17.25 46.8125 16.4375C47.6875 15.625 48.125 14.5312 48.125 13.1562C48.125 12.2396 47.9375 11.4479 47.5625 10.7812C47.1875 10.1146 46.6667 9.60417 46 9.25C45.3333 8.89583 44.5625 8.71875 43.6875 8.71875C42.875 8.71875 42.0938 8.94792 41.3438 9.40625C40.6146 9.84375 40.0625 10.4062 39.6875 11.0938C39 12.3021 38.0729 13.0833 36.9062 13.4375C35.7396 13.7708 34.6354 13.6146 33.5938 12.9688C32.5729 12.3646 31.9479 11.5312 31.7188 10.4688C31.4896 9.38542 31.6562 8.30208 32.2188 7.21875C32.9479 5.84375 33.9062 4.63542 35.0938 3.59375C36.3021 2.55208 37.6458 1.73958 39.125 1.15625C40.6042 0.572917 42.125 0.28125 43.6875 0.28125C46.1042 0.28125 48.2812 0.84375 50.2188 1.96875C52.1562 3.09375 53.6979 4.625 54.8438 6.5625C55.9896 8.5 56.5625 10.6979 56.5625 13.1562C56.5625 15.6146 55.9896 17.8229 54.8438 19.7812C53.6979 21.7188 52.1146 23.25 50.0938 24.375C48.0938 25.5 45.7917 26.0625 43.1875 26.0625C40.875 26.0625 38.6771 25.9792 36.5938 25.8125C34.5312 25.625 32.4479 25.4375 30.3438 25.25C28.2396 25.0625 26 24.9688 23.625 24.9688C20.75 24.9688 17.8229 25.1771 14.8438 25.5938C11.8854 26.0104 8.94792 26.6354 6.03125 27.4688ZM69.7188 48.4062C66.1771 48.4062 62.7188 48.0521 59.3438 47.3438C55.9896 46.6354 52.625 45.8229 49.25 44.9062C45.875 43.9688 42.4062 43.1562 38.8438 42.4688C35.2812 41.7604 31.5312 41.4062 27.5938 41.4062C23.7396 41.4062 20.0521 41.6771 16.5312 42.2188C13.0104 42.7396 9.54167 43.5729 6.125 44.7188C4.8125 45.1771 3.625 45.1458 2.5625 44.625C1.52083 44.0833 0.833333 43.2188 0.5 42.0312C0.166667 40.8854 0.28125 39.8125 0.84375 38.8125C1.40625 37.8125 2.3125 37.1146 3.5625 36.7188C7.39583 35.4896 11.3021 34.5625 15.2812 33.9375C19.2812 33.2917 23.3854 32.9688 27.5938 32.9688C31.6562 32.9688 35.5625 33.3229 39.3125 34.0312C43.0833 34.7396 46.7083 35.5625 50.1875 36.5C53.6875 37.4167 57.0625 38.2292 60.3125 38.9375C63.5625 39.625 66.6979 39.9688 69.7188 39.9688C72.4688 39.9688 74.6667 39.2812 76.3125 37.9062C77.9583 36.5312 78.7812 34.7292 78.7812 32.5C78.7812 31.0417 78.4583 29.7604 77.8125 28.6562C77.1667 27.5521 76.2812 26.6875 75.1562 26.0625C74.0521 25.4375 72.8021 25.125 71.4062 25.125C70.4062 25.125 69.4375 25.3333 68.5 25.75C67.5833 26.1458 66.7812 26.7083 66.0938 27.4375C65.4062 28.1458 64.8958 28.9688 64.5625 29.9062C64.1042 31.2396 63.3229 32.1771 62.2188 32.7188C61.1354 33.2396 60.0104 33.2812 58.8438 32.8438C57.7812 32.4688 57.0312 31.7604 56.5938 30.7188C56.1771 29.6771 56.1667 28.5625 56.5625 27.375C57.2292 25.2917 58.3021 23.4479 59.7812 21.8438C61.2604 20.2396 63 18.9896 65 18.0938C67 17.1771 69.1354 16.7188 71.4062 16.7188C74.3646 16.7188 77.0312 17.4062 79.4062 18.7812C81.8021 20.1562 83.6979 22.0417 85.0938 24.4375C86.5104 26.8125 87.2188 29.5 87.2188 32.5C87.2188 35.5625 86.4583 38.2917 84.9375 40.6875C83.4167 43.0833 81.3438 44.9688 78.7188 46.3438C76.0938 47.7188 73.0938 48.4062 69.7188 48.4062ZM43.25 78.5625C40.4583 78.5625 38 77.7604 35.875 76.1562C33.75 74.5521 32.2188 72.5208 31.2812 70.0625C30.7812 68.8542 30.7292 67.6875 31.125 66.5625C31.5208 65.4375 32.3021 64.6562 33.4688 64.2188C34.6146 63.8021 35.6979 63.8229 36.7188 64.2812C37.7396 64.7604 38.4896 65.5521 38.9688 66.6562C39.3854 67.7604 39.9479 68.6146 40.6562 69.2188C41.3646 69.8438 42.2292 70.1562 43.25 70.1562C44.4583 70.1562 45.4479 69.7708 46.2188 69C47.0104 68.2292 47.4062 67.1667 47.4062 65.8125C47.4062 63.3958 45.5417 61.4583 41.8125 60C38.0833 58.5417 32.8542 57.8125 26.125 57.8125C22.6458 57.8125 19.2188 58.0938 15.8438 58.6562C12.4896 59.1979 9.25 60.0104 6.125 61.0938C4.8125 61.5521 3.625 61.5208 2.5625 61C1.52083 60.4583 0.833333 59.5833 0.5 58.375C0.166667 57.25 0.28125 56.1875 0.84375 55.1875C1.40625 54.1875 2.3125 53.4896 3.5625 53.0938C7.10417 51.9271 10.8333 51.0208 14.75 50.375C18.6667 49.7292 22.4583 49.4062 26.125 49.4062C35.625 49.4062 42.9479 50.8229 48.0938 53.6562C53.2604 56.4896 55.8438 60.5417 55.8438 65.8125C55.8438 68.25 55.2812 70.4271 54.1562 72.3438C53.0521 74.2812 51.5521 75.8021 49.6562 76.9062C47.7604 78.0104 45.625 78.5625 43.25 78.5625Z" fill="white"/>
+                        </svg>
+                        
+                </span>
+                <span class="text-white">Vento</span>
+            </h1>
+            <div class="flex items-center justify-center">
+                <div class="mt-20 w-1/2 text-center bg-white border border-gray-200 rounded-full shadow sm:p-8">
+                    <div class="grid grid-cols-7">
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">S</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">4</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">M</span>
+                            <span class="text-xl text-white font-semibold bg-[#155042] rounded-full py-4 px-6">5</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">T</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">6</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">W</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">7</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">T</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">8</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">F</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">9</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <span class="font-sm font-semibold">S</span>
+                            <span class="text-xl text-[#9D9A9A] font-semibold">10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 p-10 gap-12 items-center">
+            <div class="div">
+
+            </div>
+            <div class="bg-[#155042] rounded-r-lg  p-10">
+                <h1
+                    class="text-white flex items-center font-[500] text-[5vw] md:text-[74px] leading-none tracking-[1.28px] font-serif font-crimison-pro">
+                    <span class="font-crimison-pro"> Rio de Janeiro</span>
+                    <span class="icon flex-shrink-0 w-[6vw] h-[8vw] md:w-[24px] md:h-[32px] mr-2">
+                        <img src="svg/direcao.svg" alt="">
+                    </span>
+                </h1>
+                <div class="flex mt-4">
+                    <span class="text-[10vw] md:text-[130px] leading-none text-white font-poppins">25°</span>
+                    <img src="svg/nublado-com-sol.svg" alt="">
+                </div>
+                <h4 class="text-white font-poppins text-[32px] leading-[25px] font-normal mb-8 mt-3">Oct 05 2024
+                </h4>
+                <h2 class="text-white font-crimison-pro text-[48px] leading-[29px] font-bold tracking-[0.3px]">
+                    Partly
+                    Cloudy</h2>
+                <h4 class="text-white font-poppins text-[32px] leading-[37px] font-normal mt-3">Saturday</h4>
+            </div>
+        </div>
+        <h4 class="text-6xl text-white px-20 pb-4 mt-10">7km/h L</h4>
+        <p class="text-2xl font-poppins text-white px-20 pb-8">
+            Rajadas de Vento: 12km/h
+        </p>
+        <div class="graficos py-10">
+            <div id="controls-carousel" class="relative w-full" data-carousel="static">
+                <!-- Carousel wrapper -->
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                    <!-- Item 1 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="svg/grafico-v5.png" class="object-contain h-full w-full">
+                    </div>
+                </div>                
+                <!-- Slider controls -->
+                <button type="button"
+                    class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                    data-carousel-prev>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#23856DB8]">
+                        <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 1 1 5l4 4" />
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button"
+                    class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                    data-carousel-next>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#23856DB8]">
+                        <svg class="w-4 h-4 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <p class="text-2xl font-poppins text-white px-20 pb-8">
+            O vento vem de direção leste a 7km/h. Hoje a velocidade do vento será de 5 a 15km/h, com rajadas de até 36km/h
+        </p>
+        <h4 class="text-6xl text-white px-20 pb-4 mt-12">Escala de Beaufort</h4>
+
+    </div>
+    
+
+    <footer class="bg-svg-pattern h-96 rounded-lg shadow w-full"></footer>
+
+</body>
+
+</html>

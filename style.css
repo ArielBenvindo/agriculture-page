@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.font-crimison-pro {
+    font-family: "Crimson Pro";
+}
+
+.font-poppins {
+    font-family: "Poppins";
+}
+
+.background-mobile {
+    background: url('svg/background.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bg-svg-pattern {
+    background-image: url('svg/footer.svg');
+    background-size: cover; /* Cobre todo o contêiner */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Impede repetição da imagem */
+}
+
+
+.photo {
+    width: 586px;
+    height: 559px;
+    flex-shrink: 0;
+    border-radius: 112px;
+}
+
+.box {
+    flex-shrink: 0;
+    top: 323px;
+    left: 725px;
+    gap: 0px;
+    opacity: 0px;
+}
+
+.icon{
+    width: 36px;
+height: 44px;
+flex-shrink: 0;
+fill: #FFF;
+}
+
+.card{
+    width: 402.582px;
+height: 817.075px;
+transform: rotate(-90deg);
+flex-shrink: 0;
+border-radius: 43px;
+background: rgba(253, 248, 231, 0.70);
+
+/* Material Blur */
+backdrop-filter: blur(25px);
+}
+
+/* Forçar o texto branco nos botões ativos com maior especificidade */
+
